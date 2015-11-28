@@ -19,6 +19,7 @@ public class PvPTag extends JavaPlugin {
 		
 		getServer().getPluginManager().registerEvents(new PlayerJoinLeave(dm), this);
 		getServer().getPluginManager().registerEvents(new EntityDamageByEntity(dm), this);
+		getServer().getPluginManager().registerEvents(new EntityDeath(dm), this);
 		
 	}
 	

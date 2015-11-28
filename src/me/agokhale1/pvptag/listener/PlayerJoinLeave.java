@@ -32,7 +32,7 @@ public class PlayerJoinLeave implements Listener {
 			PvPZombie z = new PvPZombie();
 			z.init(e.getPlayer());
 			
-			dm.addPvPZombie(e.getPlayer());
+			dm.addPvPZombie(z.getPvPZombie());
 			
 		}
 		

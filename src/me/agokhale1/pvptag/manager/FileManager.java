@@ -10,8 +10,8 @@ import org.bukkit.inventory.*;
 
 public class FileManager {
 	
-	private static FileManager taggedPlayersFile = new FileManager("TaggedPlayers");
-	private static FileManager pvpZombiesFile = new FileManager("PvPZombies");
+	private static FileManager taggedPlayersFile = new FileManager("taggedplayers");
+	private static FileManager pvpZombiesFile = new FileManager("pvpzombies");
 	
 	public static FileManager getTaggedPlayersFile()
 	{
@@ -81,6 +81,38 @@ public class FileManager {
 			Bukkit.getLogger().log(Level.SEVERE, "Could not save the file!");
 		}
 		
+	}
+	
+	public void removeInventory(String path, Object obj)
+	{
+		
+		fileCfg.set("ZombieInventories." + path, obj);
+		try
+		{
+			fileCfg.save(file);
+		}
+		catch (IOException e)
+		{
+			Bukkit.getLogger().log(Level.SEVERE, "Could not save the file!");
+		}
+		
+	}
+	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public ItemStack[] getInventory(String path)
+	{
+		
+		ItemStack[] contents = null;
+		Object o = fileCfg.get(path);
+		
+		if(o instanceof ItemStack[])
+			contents = (ItemStack[]) o;
+		else if(o instanceof List)
+		{
+			List l = (List) o;
+			contents = (ItemStack[]) l.toArray(new ItemStack[0]);
+		}
+		return contents;
 	}
 	
 }

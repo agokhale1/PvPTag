@@ -5,8 +5,7 @@ import org.bukkit.entity.*;
 import org.bukkit.event.*;
 import org.bukkit.event.entity.*;
 
-import me.agokhale1.pvptag.*;
-import me.agokhale1.pvptag.manager.DataManager;
+import me.agokhale1.pvptag.manager.*;
 
 public class EntityDamageByEntity implements Listener {
 	

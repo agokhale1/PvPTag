@@ -31,19 +31,19 @@ public class DataManager {
 		
 	}
 	
-	public void addPvPZombie(Player p)
+	public void addPvPZombie(Zombie z)
 	{
 		
-		if(!pvpZContains(p))
-			pvpZombies.add(p.getUniqueId().toString());
+		if(!pvpZContains(z))
+			pvpZombies.add(z.getUniqueId().toString());
 		
 	}
 	
-	public void removePvPZombie(Player p)
+	public void removePvPZombie(Zombie z)
 	{
 		
-		if(pvpZContains(p))
-			pvpZombies.add(p.getUniqueId().toString());
+		if(pvpZContains(z))
+			pvpZombies.remove(z.getUniqueId().toString());
 		
 	}
 	
@@ -52,9 +52,9 @@ public class DataManager {
 		return taggedPlayers.contains(p.getUniqueId().toString());
 	}
 	
-	public boolean pvpZContains(Player p)
+	public boolean pvpZContains(Zombie z)
 	{
-		return pvpZombies.contains(p.getUniqueId().toString());
+		return pvpZombies.contains(z.getUniqueId().toString());
 	}
 	
 	public List<String> getTaggedPlayers()

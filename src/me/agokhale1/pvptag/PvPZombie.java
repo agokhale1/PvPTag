@@ -46,8 +46,8 @@ public class PvPZombie {
 	public void saveZombie(Player p)
 	{
 		
-		FileManager.getPvPZombiesFile().saveInventory(p.getUniqueId().toString() + ".armor", p.getInventory().getArmorContents());
-		FileManager.getPvPZombiesFile().saveInventory(p.getUniqueId().toString() + ".inventory", p.getInventory().getContents());
+		FileManager.getPvPZombiesFile().saveInventory(z.getUniqueId().toString() + ".armor", p.getInventory().getArmorContents());
+		FileManager.getPvPZombiesFile().saveInventory(z.getUniqueId().toString() + ".inventory", p.getInventory().getContents());
 		
 	}
 	
