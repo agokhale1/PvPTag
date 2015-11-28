@@ -6,7 +6,7 @@ PvPTag, *previously authored by Tirelessly*, is a Bukkit plugin designed to prev
 - Spawns a chest with the player's inventory, accessible only to the player who logged out and the player who was in combat with them
 - Ability to use a scoreboard that displays tag status and time left if tagged instead of using commands
 - Changes the color of the player's nametag upon being tagged
-- Prevents item duplication by utilizing db (database) files
+- Prevents item duplication by utilizing flat-files
 - Prevents players who have been tagged from running commands specified in the config, teleporting (via command or enderpearl), toggling flight, and toggling gamemode (these are all able to be bypassed with permissions)
 - Multiworld support (disable/enable certain features in different worlds)
 
