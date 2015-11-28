@@ -1,0 +1,7 @@
+enabled_worlds: []
+disabled_commands: []
+ban_on_log: false
+
+# Plugin will automatically search for updates (from dev.bukkit.org) and download them if found
+# Occurs during server startup
+auto_update: false

@@ -3,21 +3,22 @@ package me.agokhale1.pvptag;
 import org.bukkit.plugin.java.*;
 
 import me.agokhale1.pvptag.listener.*;
-import me.agokhale1.pvptag.util.*;
-import me.agokhale1.pvptag.util.UpdaterUtil.UpdateType;
+import me.agokhale1.pvptag.manager.*;
 
 public class PvPTag extends JavaPlugin {
+	
+	DataManager dm;
 	
 	@Override
 	public void onEnable()
 	{
 		
-		UpdaterUtil updater = new UpdaterUtil(this, 52564, this.getFile(), UpdateType.DEFAULT, true);
+		dm = new DataManager();
 		
-		new TagDataUtil();
+		saveDefaultConfig();
 		
-		getServer().getPluginManager().registerEvents(new PlayerListener(), this);
-		getServer().getPluginManager().registerEvents(new EntityDamageByEntity(), this);
+		getServer().getPluginManager().registerEvents(new PlayerJoinLeave(dm), this);
+		getServer().getPluginManager().registerEvents(new EntityDamageByEntity(dm), this);
 		
 	}
 	
@@ -25,8 +26,8 @@ public class PvPTag extends JavaPlugin {
 	public void onDisable()
 	{
 		
-		TagDataUtil.saveFile();		
-		TagDataUtil.reset();
+		FileManager.getTaggedPlayersFile().saveList(dm.getTaggedPlayers());
+		FileManager.getPvPZombiesFile().saveList(dm.getPvPZombies());
 		
 	}
 	

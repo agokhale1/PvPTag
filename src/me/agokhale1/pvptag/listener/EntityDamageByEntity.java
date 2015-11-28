@@ -5,50 +5,47 @@ import org.bukkit.entity.*;
 import org.bukkit.event.*;
 import org.bukkit.event.entity.*;
 
-import me.agokhale1.pvptag.util.*;
+import me.agokhale1.pvptag.*;
+import me.agokhale1.pvptag.manager.DataManager;
 
 public class EntityDamageByEntity implements Listener {
 	
-	@EventHandler(priority = EventPriority.HIGHEST)
-	public void onPlayerDamage(EntityDamageByEntityEvent e)
+	DataManager dm;
+	public EntityDamageByEntity(DataManager dm)
+	{
+		this.dm = dm;
+	}
+	
+	@EventHandler
+	public void onPlayerHit(EntityDamageByEntityEvent e)
 	{
 		
 		if(e.getEntity() instanceof Player)
 		{
 			
-			Player hit = (Player) e.getEntity();
-			Player attacker;
+			Player victim = (Player) e.getEntity(), attacker;
 			
-			if(e.getDamager() instanceof Arrow)
+			if(e.getDamager() instanceof Player)
+				attacker = (Player) e.getDamager();
+			else if(e.getDamager() instanceof Arrow)
 			{
 				
 				Arrow a = (Arrow) e.getDamager();
-				if(!(a.getShooter() instanceof Player)) return;
 				
+				if(!(a.getShooter() instanceof Player)) return;
 				attacker = (Player) a.getShooter();
 				
 			}
-			else if(e.getDamager() instanceof Player)
-			{
-				
-				attacker = (Player) e.getDamager();
-				
-			}
 			else
-			{
-				
-				e.setCancelled(true);
 				return;
-				
-			}
 			
-			if(!TagDataUtil.contains(hit))
+			if(!dm.tagContains(victim))
 			{
 				
-				TagDataUtil.add(hit);
+				dm.addTagPlayer(victim);
 				
-				hit.sendMessage(ChatColor.BLUE + "[PvPTag] " + ChatColor.RED + "You have been tagged by " + ChatColor.DARK_RED.toString() + attacker.getName() + ChatColor.RED.toString() + "! Do not logout!");
-				attacker.sendMessage(ChatColor.BLUE + "[PvPTag] " + ChatColor.RED + "You have tagged " + ChatColor.DARK_RED.toString() + hit.getName());
+				victim.sendMessage(ChatColor.GOLD + "[PvPTag] " + ChatColor.RED + "You have been tagged by " + ChatColor.DARK_RED.toString() + attacker.getName() + ChatColor.RED + "! Do not logout!");
+				attacker.sendMessage(ChatColor.GOLD + "[PvPTag] " + ChatColor.RED + "You have tagged " + ChatColor.DARK_RED.toString() + victim.getName() + ChatColor.RED + "!");
 				
 			}
 			
